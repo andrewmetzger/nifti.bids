@@ -1,11 +1,15 @@
 Package: nifti.bids
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Utilities to work with NIfTI-1 files that are organized in the BIDS format
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Timothy R. Koscik
+Maintainer: Timothy R. Koscik <timkoscik+nifti.bids@gmail.com>
+Description: Utilities to work with NIfTI-1 files that are organized in the BIDS format
+Remotes:tkoscik/nifti.io
+Imports:
+  R.utils,
+  tools,
+  moments
+License: GPL-2.0
 Encoding: UTF-8
 LazyData: true
