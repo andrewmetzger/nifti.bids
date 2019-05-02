@@ -2,28 +2,28 @@ label.summary <- function(data.nii,
                           label.nii,
                           label.key,
                           save.vol = TRUE,
-                          save.stats = c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025"),
+                          save.stats = c("voxels", "mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025"),
                           overwrite.sub = TRUE,
                           save.dir=NULL,
                           save.prefix=NULL,
                           verbose=FALSE) {
 
   # debug ----
-  rm(list=ls())
-  gc()
-  library(nifti.io)
-  library(R.utils)
-  library(tools)
-  library(moments)
-
-  data.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/TissueClassify/t1_average_BRAINSABC.nii.gz"
-  label.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/JointFusion/JointFusion_HDAtlas20_2015_dustCleaned_label.nii.gz"
-  label.key="/Shared/nopoulos/nimg_core/atlas_human/baw_summarizer.tsv"
-  save.vol <- TRUE
-  save.stats <- c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025")
-  overwrite.sub <- TRUE
-  save.dir <- NULL
-  save.prefix <- NULL
+  # rm(list=ls())
+  # gc()
+  # library(nifti.io)
+  # library(R.utils)
+  # library(tools)
+  # library(moments)
+  #
+  # data.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/TissueClassify/t1_average_BRAINSABC.nii.gz"
+  # label.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/JointFusion/JointFusion_HDAtlas20_2015_dustCleaned_label.nii.gz"
+  # label.key="/Shared/nopoulos/nimg_core/atlas_human/baw_summarizer.tsv"
+  # save.vol <- TRUE
+  # save.stats <- c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025")
+  # overwrite.sub <- TRUE
+  # save.dir <- NULL
+  # save.prefix <- NULL
   # ----
 
   # Check inputs
@@ -61,8 +61,8 @@ label.summary <- function(data.nii,
   researcher <- paste0(temp[-length(temp)], collapse="/")
   project <- temp[length(temp)]
 
-  subject <- unlist(strsplit(unlist(strsplit(label.nii, split="sub-"))[2], split="_"))[1]
-  session <- unlist(strsplit(unlist(strsplit(label.nii, split="ses-"))[2], split="_"))[1]
+  subject <- unlist(strsplit(unlist(strsplit(data.nii, split="sub-"))[2], split="_"))[1]
+  session <- unlist(strsplit(unlist(strsplit(data.nii, split="ses-"))[2], split="_"))[1]
 
   temp <- unlist(strsplit(unlist(strsplit(label.nii, split="-")), "/"))
   temp <- temp[length(temp)]
@@ -77,7 +77,7 @@ label.summary <- function(data.nii,
   out.names <- character()
   if (save.vol) {
     num.rows=num.rows + 2
-    out.names <- c("volume", "voxels")
+    out.names <- "volume"
   }
   if (!is.logical(save.stats) & !is.null(save.stats)) {
     num.rows=num.rows + length(save.stats)
@@ -179,4 +179,6 @@ label.summary <- function(data.nii,
       invisible(file.remove(fls))
     }
   }
+  invisible(file.remove(data.nii))
+  invisible(file.remove(label.nii))
 }
