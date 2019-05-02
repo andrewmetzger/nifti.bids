@@ -5,23 +5,25 @@ label.summary <- function(data.nii,
                           save.stats = c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025"),
                           overwrite.sub = TRUE,
                           save.dir=NULL,
-                          save.prefix=NULL) {
+                          save.prefix=NULL,
+                          verbose=FALSE) {
 
   # debug ----
-  # rm(list=ls())
-  # gc()
-  # library(nifti.io)
-  # library(R.utils)
-  # library(tools)
-  # library(moments)
-  # data.nii <- "/Shared/nopoulos/bids_data/dm1_bids/derivatives/anat/native/sub-119_ses-60153518_site-1+2_T1w.nii.gz"
-  # label.nii <- "/Shared/nopoulos/bids_data/dm1_bids/derivatives/anat/label/BAW+clean/sub-119_ses-60153518_label-BAW+clean.nii.gz"
-  # label.key <- "/Shared/nopoulos/nimg_core/atlas_human/baw_summarizer.tsv"
-  # save.vol <- TRUE
-  # save.stats <- c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025")
-  # overwrite.sub <- TRUE
-  # save.dir <- NULL
-  # save.prefix <- NULL
+  rm(list=ls())
+  gc()
+  library(nifti.io)
+  library(R.utils)
+  library(tools)
+  library(moments)
+
+  data.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/TissueClassify/t1_average_BRAINSABC.nii.gz"
+  label.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/JointFusion/JointFusion_HDAtlas20_2015_dustCleaned_label.nii.gz"
+  label.key="/Shared/nopoulos/nimg_core/atlas_human/baw_summarizer.tsv"
+  save.vol <- TRUE
+  save.stats <- c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025")
+  overwrite.sub <- TRUE
+  save.dir <- NULL
+  save.prefix <- NULL
   # ----
 
   # Check inputs
@@ -62,7 +64,8 @@ label.summary <- function(data.nii,
   subject <- unlist(strsplit(unlist(strsplit(label.nii, split="sub-"))[2], split="_"))[1]
   session <- unlist(strsplit(unlist(strsplit(label.nii, split="ses-"))[2], split="_"))[1]
 
-  temp <- unlist(strsplit(label.nii, split="-"))
+  temp <- unlist(strsplit(unlist(strsplit(label.nii, split="-")), "/"))
+  temp <- temp[length(temp)]
   label.name <- unlist(strsplit(temp[length(temp)], "[.]"))[1]
 
   if (is.null(save.prefix)) {
