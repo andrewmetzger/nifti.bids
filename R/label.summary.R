@@ -8,24 +8,6 @@ label.summary <- function(data.nii,
                           save.prefix=NULL,
                           verbose.calc=FALSE) {
 
-  # debug ----
-  # rm(list=ls())
-  # gc()
-  # library(nifti.io)
-  # library(R.utils)
-  # library(tools)
-  # library(moments)
-  #
-  # data.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/TissueClassify/t1_average_BRAINSABC.nii.gz"
-  # label.nii="/Shared/hothlab/copd_bids/derivatives/baw/sub-D002/ses-2xqsz53tr2/JointFusion/JointFusion_HDAtlas20_2015_dustCleaned_label.nii.gz"
-  # label.key="/Shared/nopoulos/nimg_core/atlas_human/baw_summarizer.tsv"
-  # save.vol <- TRUE
-  # save.stats <- c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025")
-  # overwrite.sub <- TRUE
-  # save.dir <- NULL
-  # save.prefix <- NULL
-  # ----
-
   # Check inputs
   stopifnot(all(file.exists(data.nii, label.nii, label.key)))
 
