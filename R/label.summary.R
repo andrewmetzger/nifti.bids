@@ -1,8 +1,8 @@
-label.summary <- function(data.nii, # full path to nifti file to extract values from
-                          label.nii, # full path to nifti file containing atlas labels
-                          label.key, # full path to file
+label.summary <- function(data.nii,
+                          label.nii,
+                          label.key,
                           save.vol = TRUE,
-                          save.stats = TRUE,
+                          save.stats = c("mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025"),
                           overwrite.sub = TRUE,
                           save.dir=NULL,
                           save.prefix=NULL) {
