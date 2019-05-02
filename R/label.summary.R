@@ -6,7 +6,7 @@ label.summary <- function(data.nii,
                           overwrite.sub = TRUE,
                           save.dir=NULL,
                           save.prefix=NULL,
-                          verbose=FALSE) {
+                          verbose.calc=FALSE) {
 
   # debug ----
   # rm(list=ls())
@@ -113,7 +113,7 @@ label.summary <- function(data.nii,
         `975` = quantile(mod.vals[roi.idx], as.numeric(j)/1000, na.rm=TRUE),
         `025` = quantile(mod.vals[roi.idx], as.numeric(j)/1000, na.rm=TRUE))
 
-      if (verbose) {
+      if (verbose.calc) {
         print(sprintf("calculating %s %s", keyf$roi[i], j))
       }
     }
