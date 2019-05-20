@@ -1,6 +1,7 @@
 label.summary <- function(data.nii,
                           label.nii,
                           label.key,
+                          scratch.dir = NULL,
                           save.vol = TRUE,
                           save.stats = c("voxels", "mean", "median", "sd", "mad", "skew", "kurtosis", "975", "025"),
                           overwrite.sub = TRUE,
@@ -15,7 +16,9 @@ label.summary <- function(data.nii,
   temp <- unlist(strsplit(data.nii, split="/"))
   top.dir <- paste(temp[1:(which(temp=="derivatives")-1)], collapse="/")
 
-  scratch.dir <- paste(top.dir, "scratch", sep="/")
+  if (is.null(scratch.dir)) {
+    scratch.dir <- paste(top.dir, "scratch", sep="/")
+  }
   if (!dir.exists(scratch.dir)) { dir.create(scratch.dir) }
   # unzip niftis
   if (file_ext(data.nii) == "gz") {
