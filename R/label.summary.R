@@ -61,15 +61,14 @@ label.summary <- function(data.nii,
   num.rows <- 0
   out.names <- character()
   if (save.vol) {
-    num.rows=num.rows + 2
     out.names <- "volume"
   }
   if (!is.logical(save.stats) & !is.null(save.stats)) {
-    num.rows=num.rows + length(save.stats)
     out.names <- c(out.names, save.stats)
     data.type <- unlist(strsplit(unlist(strsplit(unlist(strsplit(data.nii, "/")), "[.]")), "_"))
     data.type <- data.type[length(data.type)-1]
   }
+  num.rows <- length(out.names)
 
   pf <- data.frame(subject = rep(subject, num.rows),
                    session = rep(session, num.rows),
